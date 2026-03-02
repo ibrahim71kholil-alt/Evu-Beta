@@ -1,86 +1,21 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evu-Beta | MD Ibrahim Kholil</title>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 90%; max-width: 400px; text-align: center; }
-        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; }
-        button { width: 95%; padding: 12px; background: #0d6efd; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-        #portfolio-section { display: none; width: 95%; max-width: 800px; text-align: center; }
-        header { background: #0d6efd; color: white; padding: 40px; border-radius: 15px; }
-        .card { background: white; margin: 15px 0; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    </style>
-</head>
-<body>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-    <div id="auth-section" class="container">
-        <h2 id="auth-title">লগইন করুন</h2>
-        <input type="email" id="email" placeholder="আপনার ইমেইল">
-        <input type="password" id="password" placeholder="পাসওয়ার্ড">
-        <button id="auth-btn" onclick="handleAuth()">লগইন</button>
-        <p onclick="toggleAuth()" style="color:#0d6efd; cursor:pointer; margin-top:15px;">অ্যাকাউন্ট নেই? রেজিস্ট্রেশন করুন</p>
-        <p id="msg" style="color: red;"></p>
-    </div>
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCGEgnFT8a-Dbik2W6JqpP88-PwlWfnecE",
+  authDomain: "evu-8921a.firebaseapp.com",
+  projectId: "evu-8921a",
+  storageBucket: "evu-8921a.firebasestorage.app",
+  messagingSenderId: "777966469701",
+  appId: "1:777966469701:web:a3c5490e93f43cb6df592c",
+  measurementId: "G-RFSCBTLGDN"
+};
 
-    <div id="portfolio-section">
-        <header>
-            <h1>MD Ibrahim Kholil (Adnan)</h1>
-            <p>Future Cyber Security Expert</p>
-        </header>
-        <div class="card">
-            <h2>About Me</h2>
-            <p>আমি ইব্রাহিম, খাগড়াছড়ি থেকে একজন ছাত্র। আমি বর্তমানে সাইবার সিকিউরিটি এবং ইথিক্যাল হ্যাকিং শিখছি।</p>
-        </div>
-        <div class="card">
-            <h2>Contact</h2>
-            <p>ইমেইল: ibrahim71kholil@email.com</p>
-            <button onclick="auth.signOut()" style="background:#dc3545; width:100px; padding: 5px;">Logout</button>
-        </div>
-    </div>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCEgnFT8a-Dbik2W6JqpPB8-Pw1WfnecE",
-            authDomain: "evu-8921a.firebaseapp.com",
-            projectId: "evu-8921a",
-            storageBucket: "evu-8921a.appspot.com",
-            messagingSenderId: "777966469701",
-            appId: "1:777966469701:web:a3c5490e93f43cb6df592c"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        let isLogin = true;
-
-        function toggleAuth() {
-            isLogin = !isLogin;
-            document.getElementById("auth-title").innerText = isLogin ? "লগইন করুন" : "রেজিস্ট্রেশন করুন";
-            document.getElementById("auth-btn").innerText = isLogin ? "লগইন" : "রেজিস্ট্রেশন";
-        }
-
-        function handleAuth() {
-            const email = document.getElementById("email").value;
-            const pass = document.getElementById("password").value;
-            if(isLogin) {
-                auth.signInWithEmailAndPassword(email, pass).catch(e => alert("ভুল ইমেইল বা পাসওয়ার্ড!"));
-            } else {
-                auth.createUserWithEmailAndPassword(email, pass).then(() => alert("রেজিস্ট্রেশন সফল! এখন লগইন করুন।"));
-            }
-        }
-
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                document.getElementById("auth-section").style.display = "none";
-                document.getElementById("portfolio-section").style.display = "block";
-            } else {
-                document.getElementById("auth-section").style.display = "inline-block";
-                document.getElementById("portfolio-section").style.display = "none";
-            }
-        });
-    </script>
-</body>
-</html>
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
