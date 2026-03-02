@@ -1,55 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Login</title>
-</head>
-<body>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-<h2>Register / Login</h2>
-
-<input type="email" id="email" placeholder="Email"><br><br>
-<input type="password" id="password" placeholder="Password"><br><br>
-
-<button onclick="register()">Register</button>
-<button onclick="login()">Login</button>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCGEgnFT8a-Dbik2W6JqpP88-PwlWfnecE",
   authDomain: "evu-8921a.firebaseapp.com",
   projectId: "evu-8921a",
   storageBucket: "evu-8921a.firebasestorage.app",
   messagingSenderId: "777966469701",
-  appId: "1:777966469701:web:a3c5490e93f43cb6df592c"
+  appId: "1:777966469701:web:e782d1df25f7246adf592c",
+  measurementId: "G-3BFDY5B1CM"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.register = function() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Registered Successfully"))
-    .catch((error) => alert(error.message));
-}
-
-window.login = function() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      alert("Login Successful");
-      window.location.href = "index.html";
-    })
-    .catch((error) => alert(error.message));
-}
-</script>
-
-</body>
-</html>
+const analytics = getAnalytics(app);
